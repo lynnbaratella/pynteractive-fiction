@@ -1,0 +1,72 @@
+\def\scene{bedroom}{
+You get to the bedroom and start looking around.
+The desk is in front of you; the bed on the right.
+}\actions{bedroom}
+
+
+\def\actions{bedroom}{
+<<[\oneshot] Get on the bed and start jumping \reaction{jumpyBed}
+<< Examine the desk \scene{pencilCase}
+}
+
+\def\reaction{jumpyBed}[1]{
+You start jumping on the bed laughing hysterically
+++ Boing
+++ Boing
+++ Boing
+++ *CRACK*
+++[3] Tired of jumping, you resume the research.
+} \actions{bedroom}
+
+\def\scene{pencilCase}{
+Nothing interesting on the desk. It's relatively clean and ordered, for once.
+You notice though a suspiciously bulky pencil case.
+You open it and you find, together with a ballpoint, a rubber and a pencil, a black ancient-looking ebonite fountain pen. The nib is all consumed and doesn't look like it could write, but the barrel might be wide enough to fit a message...
+}\actions{pencilCase}
+
+
+\def\actions{pencilCase}{
+<<[\oneshot] You can open the barrel \reaction{inkyMess}
+<< You can come back to searching the room \scene{bedroom}
+}
+
+
+\def\reaction{inkyMess}[1]{
+You unscrew the barrel and ink spills out, littering your hands.
+++[3] Starting to flood the desk...
+++[2] It's running...
+++ towards my white keyboard
+++ Don't stand there looking! Stop it!
+++[3] Goddamn it.
+} \actions{inkyMess}
+
+
+\def\actions{inkyMess}{
+<<[\oneshot] you can take a napkin and clean that bloody mess \reaction{bitchyInky}
+<<[\oneshot] you can go to the bathroom to wash your hands \reaction{washiInky}
+<< You can come back to searching the room \reaction{end}
+}
+
+
+\def\reaction{bitchyInky}[1]{
+You know what, just leave it there: I'll clean up later.
+} \actions{inkyMess}
+
+
+\def\reaction{washiInky}[3]{
+The dim light of the sunset enters the window.
+++[3] You're rubbing your hands under the water, staring at the mirror, when you suddenly realise that human consciousness is a tragic misstep in evolution.
+++ We became too self-aware, nature created an aspect of nature separate from itself, we are creatures that should not exist by natural law.
+++ We are things that labor under the illusion of having a self
+++ an accretion of sensory experience and feeling, programmed with total assurance that we are each somebody
+++ when in fact everybody is nobody.
+++ Maybe the honourable thing for our species to do is deny our programming, stop reproducing, walk hand in hand into extinction...
+++ You're consuming your skin, please stop now. Your hands can't get cleaner than this.
+} \actions{inkyMess}
+
+
+\def\reaction{end}[1]{
+You're about to resume the search when you suddenly find what you were looking for.
+++ Yeah, I know.
+++ This fiction is awful.
+} \ENDGAME
