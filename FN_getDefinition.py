@@ -3,7 +3,7 @@
 # From a captured \def command it creates a dictionary containing its definition
 
 import re
-from strFun import str2num # (string)
+from FN_strFun import str2num # (string)
 
 
 def getDefinition(captured, fileTranscript):
