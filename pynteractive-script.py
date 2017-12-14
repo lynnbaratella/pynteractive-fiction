@@ -66,8 +66,8 @@ def transcribe(fileName):
 
     fileTranscript = []
     try:
-        # make it the script folder instead
-        path = os.path.expanduser('~/Dropbox/Python/#textAdventure/Interactive Fiction/') #
+        
+        path = os.path.expanduser('~/Dropbox/Python/#textAdventure/Interactive Fiction/') # change 1/2 HERE
         path = path + fileName
 
         # transcribe file into list
@@ -191,7 +191,7 @@ def endGame():
 
 # %% Transcription
 
-fileTranscript = transcribe('test_fiction.txt') # enter the name of the text file of interest
+fileTranscript = transcribe('test_fiction.txt') # change 2/2 HERE
 
 # %% Start game
 
@@ -281,14 +281,16 @@ while breakLine < len(fileTranscript):
 
 * completely load the game at game start + accurate error reporting for command definitions
 * make \oneshot actions actually work
-* remove the extra newlines: if isEmpty: don't add. Possible option (debugging might be harder)
+* easier game setup (no need to define path?)
+
+* remove the extra newlines/tabs: if isEmpty: don't add. Possible option (debugging might be harder)
 * IF NO SUBSEQUENT COMMAND RESUME FROM LAST ACTION (warning message)
 
 
 
 # game steps:
 1. begin with first available _defined_ scene
-2. read text until closing bracket line
+2. read() text until closing bracket line
 3. capture command on that same line
 4. look for \def\command{}
 
