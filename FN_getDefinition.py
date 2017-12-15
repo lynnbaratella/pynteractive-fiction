@@ -6,10 +6,10 @@ import re
 from FN_strFun import str2num # (string)
 
 
-def getDefinition(captured, fileTranscript):
+def getDefinition(startingPoint, captured, fileTranscript):
 
-    startingPoint = captured['idx']
-    token = {'type': None, 'content': None, 'break': None}
+
+    token = {'content': None, 'break': None}
 
     try:
         if captured['type'] == 'scene':
@@ -29,7 +29,7 @@ def getDefinition(captured, fileTranscript):
                 lineIdx += 1
 
 
-            token['type'] = 'scene'
+
             token['content'] = {'text': text}
             token['break'] = breakLine
 
@@ -69,7 +69,7 @@ def getDefinition(captured, fileTranscript):
                 lineIdx += 1
 
 
-            token['type'] = 'actions'
+
             token['content'] = {'oneshot': isDone, 'text': text, 'next': nextCommand}
             token['break'] = breakLine
 
@@ -79,7 +79,7 @@ def getDefinition(captured, fileTranscript):
 
         elif captured['type'] == 'reaction':
 
-            token['type'] = 'reaction'
+
             # timedReactionPattern = re.compile(r'(?:\+\+)((?:\[)(\d+)(?:\]))* (.+)')
             timedReactionPattern = re.compile(r'(?:\+\+)((?:\[)(\d+\.*\d*)(?:\]))* (.+)')
 
@@ -126,7 +126,7 @@ def getDefinition(captured, fileTranscript):
                 lineIdx += 1
 
 
-            token['type'] = 'reaction'
+
             token['content'] = {'gen': generalTime, 'spec': specificTime, 'text': text}
             # when reading the general timing is applied only after the second item of the reaction text
             token['break'] = breakLine

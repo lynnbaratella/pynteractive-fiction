@@ -1,5 +1,4 @@
 
-import os.path
 
 from time import sleep
 
@@ -14,45 +13,8 @@ from FN_strFun import find # returns list of indices; (string, stringList, varar
 
  # %% Functions
 
-def transcribe(fileName):
-
-    fileTranscript = []
-    try:
-        
-        path = os.path.expanduser('~/Dropbox/Python/#textAdventure/pynteractive-fiction/') # change 1/2 HERE
-        path = path + fileName
-
-        # transcribe file into list
-        with open(path, 'r') as myfile:
-
-            fileTranscript = myfile.readlines()
-            return fileTranscript
-
-    except FileNotFoundError as e:
-        raise Exception('The specified path is not correct.\n'
-                        'Check out:\n'
-                        '- the folder path in the definition of the funtion '
-                        'transcribe();\n'
-                        '- the file name on function call.').with_traceback(e.__traceback__)
 
 
-
-def beginningScene(pattern, fileTranscript): # useless now: the writer must define the startin scene
-
-    lineIdx = 0
-
-    while lineIdx < len(fileTranscript):
-
-        captured = extractCommand(pattern, fileTranscript, lineIdx)
-
-        if (captured# exists
-          and captured['isDef']
-          and captured['type'] == 'scene'):
-
-
-            return  captured
-
-        lineIdx += 1
 
 
 
@@ -103,9 +65,6 @@ def endGame():
     raise KeyboardInterrupt('The game was interrupted by the user')
 
 
-# %% Transcription
-
-fileTranscript = transcribe('test_fiction.txt') # change 2/2 HERE
 
 # %% Start game
 
