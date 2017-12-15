@@ -1,0 +1,21 @@
+\def\scene{somewhere}{
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+}\actions{actionsName}
+
+
+\def\actions{actionsName}{
+<< Do something \reaction{something}
+<< Go to some place \scene{somePlace}
+}
+
+\def\reaction{something}[1]{
+You do something.
+++ Bad consequences
+++ happening after 1 second as specified
+++ or
+++[3] even a different time.
+} \actions{actionsName}
+
+\def\scene{somePlace}{
+You win. Happy feelings.
+}\ENDGAME
