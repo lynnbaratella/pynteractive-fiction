@@ -3,20 +3,11 @@
 ## The syntax
 
 A simple LaTeX-y syntax for writing short interactive fictions.
+
 Three types of entry: 
 * `\scene`: the main descriptions can be written here 
 * `\actions`: a set of possibilities the player has to choose from 
 * `\reaction`: what happens (mostly) after an action has been chosen. They can be timed (`++ ` symbol), either by specifying an optional parameter for the whole entry or for a single line only.
-
-### DA RULES
-- Every entry has to be preceded by `\def`
-- every entry needs a name (first field) and a description (second mandatory field)
-- mind the closing brace on newline
-- after that closing brace in the entries `\scene` and `\reaction` you'll need to specify to the program where to look next (the next command, *without* specifying `\def`)
-- in the case of `\actions` entry you'll need a `<< ` for every line of text; the next command can be specified right after every line of text
-- with `\reaction` entries you can specify in squared brackets, right after the name, the time in seconds that every `++ ` line will wait before being displayed. As an alternative you can specify that number in squared brackets after the double plus symbol (`++[2] `) 
-- to end the game (you might want to) you can simply use `\ENDGAME` as the next command (yes, in Caps: you're screaming to the computer).
-- see "How to make it work" for what concerns the script setup
 
 ### Example
 A short working example of the content of the text file
@@ -43,6 +34,16 @@ You do something.
 You win. Happy feelings.
 }\ENDGAME
 ```
+
+### DA RULES
+- Every entry has to be preceded by `\def`
+- every entry needs a name (first field) and a description (second mandatory field)
+- mind the closing brace on newline
+- after that closing brace in the entries `\scene` and `\reaction` you'll need to specify to the program where to look next (the next command, *without* specifying `\def`)
+- in the case of `\actions` entry you'll need a `<< ` for every line of text; the next command can be specified right after every line of text
+- with `\reaction` entries you can specify in squared brackets, right after the name, the time in seconds that every `++ ` line will wait before being displayed. As an alternative you can specify that number in squared brackets after the double plus symbol (`++[2] `) 
+- to end the game (you might want to) you can simply use `\ENDGAME` as the next command (yes, in Caps: you're screaming to the computer).
+- see "How to make it work" for what concerns the script setup
 
 ## The script
 * written on Python 3.6
