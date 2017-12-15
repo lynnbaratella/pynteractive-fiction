@@ -67,7 +67,7 @@ def transcribe(fileName):
     fileTranscript = []
     try:
         
-        path = os.path.expanduser('~/Dropbox/Python/#textAdventure/Interactive Fiction/') # change 1/2 HERE
+        path = os.path.expanduser('~/Dropbox/Python/#textAdventure/pynteractive-fiction/') # change 1/2 HERE
         path = path + fileName
 
         # transcribe file into list
