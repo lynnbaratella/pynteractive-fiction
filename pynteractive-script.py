@@ -1,4 +1,4 @@
-import re
+
 import os.path
 
 from time import sleep
@@ -11,56 +11,8 @@ from FN_strFun import str2int
 from FN_strFun import find # returns list of indices; (string, stringList, varargin:howMany)
 
 
-# %%  Command pattern definition
-
-pattern = re.compile(r""" # raw string for regular expression
-
-    (?: \\def)*                             # group 0: whole match
-
-
-    (                                       # group 1: scene/actions/reaction command
-    (?: \\(scene|actions|reaction) \{)      # group 2: which of the 3?
-        (\w+)                               # group 3: name
-    (?: \} )
-    ((?:\[) (\w+) (?: \]))*                   # group 4?   counter-consequnce/timer (no brackets)
-    )
-
-      """, re.VERBOSE)
-
 
  # %% Functions
-
-def loadGame(fileTranscript):
-
-        # look for the definitions
-    defIdx = find(r'\def', fileTranscript)
-        # init defhistory
-    defHistory = {}
-    # errorList = []
-
-    for idx in defIdx:
-
-        captured = extractCommand(pattern, fileTranscript, idx)
-        # breakLine = idx + 1
-        definition = getDefinition(captured, fileTranscript)
-        defHistory = addToDefHistory(captured, definition, defHistory)
-
-    return defHistory
-
-"""
-        try:
-            captured = extractCommand(pattern, fileTranscript, idx)
-            # breakLine = idx + 1
-            definition = getDefinition(captured, fileTranscript)
-            defHistory = addToDefHistory(captured, definition, defHistory)
-        except:
-            print(idx)
-            errorList.append(idx)
-
-
-    return defHistory, errorList
-"""
-
 
 def transcribe(fileName):
 
@@ -85,36 +37,7 @@ def transcribe(fileName):
 
 
 
-
-def extractCommand(pattern, fileTranscript, lineIdx): # given pattern, from single line
-    line = fileTranscript[lineIdx]
-    reOutput = pattern.search(line)
-
-    if reOutput:
-
-        wholeCommand = reOutput.group(0)
-        pureCommand = reOutput.group(1)
-        typeCommand = reOutput.group(2)
-        nameField = reOutput.group(3)
-        optionalField = {'whole': reOutput.group(4),
-                    'pure': reOutput.group(5)}
-
-        captured = {'whole': wholeCommand,
-                    'pure': pureCommand,
-                    'type': typeCommand,
-                    'name': nameField,
-                    'opt': optionalField,
-                    'idx': lineIdx}
-
-
-        captured['isDef'] = captured['whole'] != captured['pure']
-
-        return captured
-
-
-
-
-def beginningScene(pattern, fileTranscript):
+def beginningScene(pattern, fileTranscript): # useless now: the writer must define the startin scene
 
     lineIdx = 0
 
@@ -152,15 +75,6 @@ def promptAction(message,maxNum):
 
     return userInput
 
-
-
-def addToDefHistory(captured, definition, defHistory):
-
-    #howManyTimes = 0
-    # dictionary containing pure commands pointing at the original definition dictionary
-    defHistory.update({captured['pure']: definition}) # not considering the alternative scenes?
-
-    return defHistory
 
 
 
@@ -286,7 +200,11 @@ while breakLine < len(fileTranscript):
 * remove the extra newlines/tabs: if isEmpty: don't add. Possible option (debugging might be harder)
 * IF NO SUBSEQUENT COMMAND RESUME FROM LAST ACTION (warning message)
 
+* transcription of multiple files (list of filenames as a single input)
 
+report double begin_index (+ filename if they differ) in these cases:
+* warning if same name in different trype of entry
+* error if same command is repeated
 
 # game steps:
 1. begin with first available _defined_ scene
