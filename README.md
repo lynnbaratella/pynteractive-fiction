@@ -54,23 +54,24 @@ You win. Happy feelings.
 2. in the file "pynteractive.py", where the function `transcribe()` is called change the file name
 3. in the same file, where the function `transcribe()` is defined adjust the path of the folder containing the script 
 4. if you're having trouble with the two previous operations just use ctrl+F or cmd+F and look for the two instances of "here".
-5. run the script and enjoy the game
+5. run the script, follow the instructions and enjoy the game
 
 ### How it works
 Main game steps:
 1. begin with first available _defined_ scene
-2. read() text until closing bracket line
+2. `read()` text until closing bracket line
 3. capture command on that same line
-4. look for \def\command{}
+4. look for `\def\<command>{}`
 5. start over with #2
 
-## Work in progress
+## Work In Progress
 1. **Loading the whole game in advance:** Currently the entries are loaded during the game, something that might lead to errors while playing if entries are missing or the syntax is incorrect. I'm working in order to load the whole game beforehand, so the in-game behavior will be completely predictable.
 2. **Oneshot actions**: `<<[\oneshot] you do something` makes the action disappear when you come back to the same action menu.
-3. simplified setup
+3. **Simplified setup**
 
 ## Limitations
 This is my *first* proper Python project; let me save you some time. 
+
 Look somewhere else if:
 * you need to write long and complex storylines: with this syntax errors are easy to miss (WIP #1 might partially solve the problem)
 * you're feeling lazy: impossibility to use placeholders (e.g. in order to write a single reaction where one word changes according to the chosen actions): you might need to manually write multiple similar entries
