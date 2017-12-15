@@ -9,7 +9,7 @@ Three types of entry:
 * `\actions`: a set of possibilities the player has to choose from 
 * `\reaction`: what happens (mostly) after an action has been chosen. They can be timed (`++ ` symbol), either by specifying an optional parameter for the whole entry or for a single line only.
 
-### Example
+### example
 A short working example of the content of the text file
 ```
 \def\scene{somewhere}{
@@ -35,7 +35,7 @@ You win. Happy feelings.
 }\ENDGAME
 ```
 
-### DA RULES
+### da rules
 - Every entry has to be preceded by `\def`
 - every entry needs a name (first field) and a description (second mandatory field)
 - mind the closing brace on newline
@@ -50,14 +50,14 @@ You win. Happy feelings.
 * dictionary-based
 * informative errors
 
-### Setup
+### setup
 1. the game has to be written in a text file in the same folder as the script
 2. in the file "pynteractive.py", where the function `transcribe()` is called change the file name
 3. in the same file, where the function `transcribe()` is defined adjust the path of the folder containing the script 
 4. if you're having trouble with the two previous operations just use ctrl+F or cmd+F and look for the two instances of "here".
 5. run the script, follow the instructions and enjoy the game
 
-### How it works
+### how it works
 Main game steps:
 1. begin with first available _defined_ scene
 2. `read()` text until closing bracket line
