@@ -30,37 +30,6 @@ pattern = re.compile(r""" # raw string for regular expression
 
  # %% Functions
 
-def loadGame(fileTranscript):
-
-        # look for the definitions
-    defIdx = find(r'\def', fileTranscript)
-        # init defhistory
-    defHistory = {}
-    # errorList = []
-
-    for idx in defIdx:
-
-        captured = extractCommand(pattern, fileTranscript, idx)
-        # breakLine = idx + 1
-        definition = getDefinition(captured, fileTranscript)
-        defHistory = addToDefHistory(captured, definition, defHistory)
-
-    return defHistory
-
-"""
-        try:
-            captured = extractCommand(pattern, fileTranscript, idx)
-            # breakLine = idx + 1
-            definition = getDefinition(captured, fileTranscript)
-            defHistory = addToDefHistory(captured, definition, defHistory)
-        except:
-            print(idx)
-            errorList.append(idx)
-
-
-    return defHistory, errorList
-"""
-
 
 def transcribe(fileName):
 
@@ -157,8 +126,7 @@ def promptAction(message,maxNum):
 def addToDefHistory(captured, definition, defHistory):
 
     #howManyTimes = 0
-    # dictionary containing pure commands pointing at the original definition dictionary
-    defHistory.update({captured['pure']: definition}) # not considering the alternative scenes?
+    defHistory.update({captured['pure']: definition})
 
     return defHistory
 
@@ -192,11 +160,6 @@ def endGame():
 # %% Transcription
 
 fileTranscript = transcribe('test_fiction.txt') # change 2/2 HERE
-
-# %% Start game
-
-
-loadGame(fileTranscript)
 
 # ready to start?
 gameStart()
