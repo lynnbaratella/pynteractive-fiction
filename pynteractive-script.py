@@ -35,8 +35,12 @@ def transcribe(fileName):
 
     fileTranscript = []
     try:
-        
-        path = os.path.expanduser('~/Dropbox/Python/#textAdventure/pynteractive-fiction/') # change 1/2 HERE
+        # SET FOLDER PATH
+        path = os.path.expanduser('~/Downloads/pynteractive-fiction-master/') # change 1/2 HERE
+        # path = '/Users/<username>/Downloads/pynteractive-fiction-master/' # or use this one
+        if path[-1] != '/':
+            path = path + '/'
+           
         path = path + fileName
 
         # transcribe file into list
