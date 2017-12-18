@@ -111,7 +111,8 @@ def promptAction(message,maxNum):
 
     userInput = input(message)
 
-    if userInput == 'exit':
+    if ('exit' in userInput
+        or 'quit' in userInput):
         endGame()
 
     userInput = str2int(userInput)
