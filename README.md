@@ -12,8 +12,8 @@ Three types of entry:
 ### example
 A short working example of the content of the text file
 ```
-\def\scene{somewhere}{
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+\def\scene{whereItBegins}{
+This is where it begins.
 }\actions{actionsName}
 
 
