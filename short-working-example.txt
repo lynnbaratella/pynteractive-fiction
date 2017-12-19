@@ -1,5 +1,5 @@
-\def\scene{somewhere}{
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+\def\scene{whereItBegins}{
+This is where it begins.
 }\actions{actionsName}
 
 
