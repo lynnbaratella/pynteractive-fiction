@@ -25,24 +25,30 @@ def read(token):
 
     elif token['command']['type'] == 'actions':
 
-        # ONESHOT?
+        # ONESHOT still to be completed
+        # USE CARDINAL
 
-
+        #oneshot = token['content']['oneshot']
+        text = token['content']['text']
+        cardinal = token['content']['cardinal']
+        """
         if anyTrue(token['content']['oneshot']):
             # the numbers on the list of options change
 
-            oneshot = token['content']['oneshot']
-            text = token['content']['text']
-            options = [[],[]]
+            options = []
             for idx in range(0, len(text)):
                 if oneshot[idx] != True: # (False or None)
-                    options[0].append(oneshot[idx])
-                    options[1].append(text[idx])
+                    options.append(text[idx])
             print()
-        for idx in range(0, len(token['content']['text'])):
 
-            print(str(idx+1) + '. ' + token['content']['text'][idx])
-            # print only the text until the next command
+        else:
+            options = text
+        """
+
+        for idx in range(0, len(cardinal)):
+            if cardinal[idx]:
+                print(str(cardinal[idx]) + '. ' + text[idx])
+
 
 
 

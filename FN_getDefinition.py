@@ -42,6 +42,7 @@ def getDefinition(startingPoint, captured, fileTranscript):
             text = []
             nextCommand = []
             isDone = []
+            cardinal = []
 
 
             while lineIdx < len(fileTranscript):
@@ -69,8 +70,9 @@ def getDefinition(startingPoint, captured, fileTranscript):
                 lineIdx += 1
 
 
+            cardinal = [(idx + 1) for idx in range(0, len(text))]
 
-            token['content'] = {'oneshot': isDone, 'text': text, 'next': nextCommand}
+            token['content'] = {'cardinal': cardinal, 'oneshot': isDone, 'text': text, 'next': nextCommand}
             token['break'] = breakLine
 
 

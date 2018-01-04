@@ -161,9 +161,17 @@ def extractCommand(pattern, fileTranscript, lineIdx): # given pattern, from sing
     if reOutput:
 
         wholeCommand = reOutput.group(0)
-        pureCommand = reOutput.group(1)
         typeCommand = reOutput.group(2)
         nameField = reOutput.group(3)
+
+        if typeCommand == 'reaction': # the [1] would be retained in the pure command
+            opt = reOutput.group(4)
+            notPureCommand = reOutput.group(1)
+            pureCommand = notPureCommand.replace(opt,'')
+        else:
+            pureCommand = reOutput.group(1) # if scene or action
+
+
         optionalField = {'whole': reOutput.group(4),
                     'pure': reOutput.group(5)}
 

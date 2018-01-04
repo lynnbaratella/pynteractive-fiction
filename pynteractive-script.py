@@ -80,13 +80,34 @@ def endGame():
 gameStart()
 
 # begin with first available _defined_ scene
-currentEntry = firstScene
+nextEntry = firstScene
 
 
 while True:
-    token = game[currentEntry]
+    token = game[nextEntry]
     read(token)
 
+    if token['command']['type'] == 'actions':
+        cardinal = token['content']['cardinal']
+
+        nChoices = len([i for i in cardinal if i])
+        whichAction = promptAction('\n',nChoices)
+
+        indexAction = cardinal.index(whichAction)
+        if token['content']['oneshot'][indexAction] is False: # oneshot action to be done
+
+            token['content']['oneshot'][indexAction] = True # marked done
+            cardinal[indexAction] = None # removed the corresponding number
+
+            idx = 0
+            while idx < (len(cardinal)-(indexAction + 1)):
+                cardinal[indexAction + idx + 1] = whichAction + idx # ISSUE HERE
+                idx = idx + 1
+                # fix the following cardinal numbers
+
+        nextEntry = token['content']['next'][indexAction] # find index
+    else:
+        nextEntry = token['metadata']['nextCommand']
 
 
 
