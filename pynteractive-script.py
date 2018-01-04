@@ -9,6 +9,11 @@ from FN_getDefinition import getDefinition
 from FN_strFun import str2int
 from FN_strFun import find # returns list of indices; (string, stringList, varargin:howMany)
 
+from FN_loadGame import loadGame
+
+# %% Files
+
+fileNameList = ['test_fiction.txt'] # HERE
 
 
  # %% Functions
@@ -69,82 +74,21 @@ def endGame():
 # %% Start game
 
 
-loadGame(fileTranscript)
+[game, firstScene] = loadGame(fileNameList)
 
 # ready to start?
 gameStart()
 
 # begin with first available _defined_ scene
-captured = beginningScene(pattern, fileTranscript)
+currentEntry = firstScene
 
 
-# read until break
-definition = getDefinition(captured, fileTranscript)
-read(definition)
-
-# initializing def history
-defHistory = {}
-defHistory = addToDefHistory(captured, definition, defHistory)
-
-# return breakline
-breakLine = definition['break']
-
-
-# %% game loop
-
-lineIdx = breakLine
-timeoutCounter = 0
-
-while breakLine < len(fileTranscript):
-
-    # extract the command from the current line
-    captured = extractCommand(pattern, fileTranscript, breakLine)
-
-    try:
-
-        if captured['isDef']: # is it the definition of the command?
-
-            definition = getDefinition(captured, fileTranscript) ###
-            defHistory = addToDefHistory(captured, definition, defHistory)
-
-            read(definition)
-
-            if definition['type'] == 'actions':
-                nChoices = len(definition['content']['next'])
-                whichAction = promptAction('\n',nChoices)
-
-                # converting to indexing
-                whichAction -= 1
-
-                # subtracting the negative index from original breakline
-                breakLine = definition['break'] - (nChoices - whichAction)
-
-
-            else:
-                breakLine = definition['break']
-
-                if '\ENDGAME' in fileTranscript[breakLine]:
-                    raise Exception('Thank you for playing.')
-
-
-        else: # it's the next event: look for its definition
-
-
-            lineIdx  = find(('\\def'+captured['pure']), fileTranscript, 1) # loop through the list and check for string in line
-
-            try:
-                # use as breakline the first occurrence of the definition (in case of multiple instances)
-                breakLine = lineIdx[0]
-
-
-            except IndexError as e:
-                raise Exception('Command definition not found').with_traceback(e.__traceback__)
+while True:
+    token = game[currentEntry]
+    read(token)
 
 
 
-
-    except TypeError as e:
-        raise Exception('Error from the command on line ' + str(breakLine) + '.').with_traceback(e.__traceback__)
 
 
 # %% NOTES:

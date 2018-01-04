@@ -1,3 +1,6 @@
+\BEGIN\scene{bedroom}
+
+
 \def\scene{bedroom}{
 You get to the bedroom and start looking around.
 The desk is in front of you; the bed on the right.

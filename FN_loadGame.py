@@ -49,8 +49,7 @@ overlapping stuff between extractCommand and getDefinition:
 def loadGame(fileNameList):
 
     game = {}
-    entry = {'command': None, 'content': None, 'indices': None, 'metadata': None}
-    entry['metadata'] = {'counter': 0, 'nextCommand': None} # nextActionCmd parallel list of the actions text
+
 
     firstScene = None
 
@@ -65,10 +64,13 @@ def loadGame(fileNameList):
 
         # look for the definitions
         defIndices = find(r'\def', fileTranscript)
-        firstScene = beginningScene
+        firstScene = beginningScene(pattern, fileTranscript)
 
 
         for defIdx in defIndices:
+
+            entry = {'command': None, 'content': None, 'indices': None, 'metadata': None}
+            entry['metadata'] = {'counter': 0, 'nextCommand': None} # nextActionCmd parallel list of the actions text
 
             try:
 
@@ -93,9 +95,10 @@ def loadGame(fileNameList):
 
                         entry['metadata']['nextCommand'] = r'\ENDGAME' # endgame can be in this position OR in the next action command
 
-                    elif captured['type'] != 'actions':
+                    elif captured['type'] != 'actions': # saving new command after "}", absent in actions
                         newCommand = extractCommand(pattern, fileTranscript, definition['break'])
                         entry['metadata']['nextCommand'] = newCommand['pure']
+
                 except TypeError as e:
                     raise Exception('Cannot recognize command on line ' + lineNum(definition['break'])).with_traceback(e.__traceback__)
 
@@ -117,6 +120,7 @@ def loadGame(fileNameList):
 
                 #errorList.append(defIdx)"""
 
+    # after looping through all the files
     if not firstScene:
         raise Exception('Missing \BEGIN\scene{<scene_name>} from any of the files.')
 
@@ -172,7 +176,7 @@ def extractCommand(pattern, fileTranscript, lineIdx): # given pattern, from sing
         return captured
 
 
-def beginningScene(pattern, fileTranscript): # useless now: the writer must define the startin scene
+def beginningScene(pattern, fileTranscript):
 
     beginIdx = find(r'\BEGIN', fileTranscript)
 
@@ -208,3 +212,4 @@ pattern = re.compile(r""" # raw string for regular expression
 
 
 
+[game, begin] = loadGame('test_fiction.txt')

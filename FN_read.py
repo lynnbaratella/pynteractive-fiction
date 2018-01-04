@@ -7,22 +7,38 @@ from time import sleep
 # defaultTime = 0.5 # doesn't change the default time for getDefinition
 
 def read(token):
-    
+
     print('\n')
-    
-    
-    if token['type'] == 'scene':
+
+
+
+
+
+    if token['command']['type'] == 'scene':
 
         for idx in range(0, len(token['content']['text'])):
-            print(token['content']['text'][idx])
-            
+            print(token['content']['text'][idx]) # time separation for printing scene paragraphs?
 
-    elif token['type'] == 'actions':
 
-        # ONESHOT:
-        # when you come back to the action a new instance is created.
-        # need to store the data and reaccess it later for making the oneshots work.
-        # print('\n')
+
+
+
+    elif token['command']['type'] == 'actions':
+
+        # ONESHOT?
+
+
+        if anyTrue(token['content']['oneshot']):
+            # the numbers on the list of options change
+
+            oneshot = token['content']['oneshot']
+            text = token['content']['text']
+            options = [[],[]]
+            for idx in range(0, len(text)):
+                if oneshot[idx] != True: # (False or None)
+                    options[0].append(oneshot[idx])
+                    options[1].append(text[idx])
+            print()
         for idx in range(0, len(token['content']['text'])):
 
             print(str(idx+1) + '. ' + token['content']['text'][idx])
@@ -33,7 +49,7 @@ def read(token):
 
 
 
-    elif token['type'] == 'reaction':
+    elif token['command']['type'] == 'reaction':
 
         for idx in range(0, len(token['content']['text'])):
 
@@ -64,3 +80,13 @@ def read(token):
                         sleep(token['content']['spec'][idx])
                 except TypeError:
                         sleep(token['content']['gen'])
+
+
+
+def anyTrue(listName):
+
+
+    for idx in range(0, len(listName)):
+        if listName[idx] is True:
+            return True
+    return False
