@@ -49,9 +49,8 @@ overlapping stuff between extractCommand and getDefinition:
 def loadGame(fileNameList):
 
     game = {}
-
-
     firstScene = None
+
 
     if type(fileNameList) == str:
         fileNameList = [fileNameList]
@@ -64,7 +63,9 @@ def loadGame(fileNameList):
 
         # look for the definitions
         defIndices = find(r'\def', fileTranscript)
-        firstScene = beginningScene(pattern, fileTranscript)
+
+        if not firstScene: # stops looking after the first \BEGIN instance
+            firstScene = beginningScene(pattern, fileTranscript)
 
 
         for defIdx in defIndices:
