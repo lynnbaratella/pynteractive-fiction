@@ -164,7 +164,8 @@ def extractCommand(pattern, fileTranscript, lineIdx): # given pattern, from sing
         typeCommand = reOutput.group(2)
         nameField = reOutput.group(3)
 
-        if typeCommand == 'reaction': # the [1] would be retained in the pure command
+        if (typeCommand == 'reaction'
+            and reOutput.group(4)): # the [1] could be retained in the pure command
             opt = reOutput.group(4)
             notPureCommand = reOutput.group(1)
             pureCommand = notPureCommand.replace(opt,'')
@@ -212,7 +213,7 @@ pattern = re.compile(r""" # raw string for regular expression
     (?: \\(scene|actions|reaction) \{)      # group 2: which of the 3?
         (\w+)                               # group 3: name
     (?: \} )
-    ((?:\[) (\w+) (?: \]))*                   # group 4?   counter-consequnce/timer (no brackets)
+    ((?:\[) (.+) (?: \]))*                   # group 4?   counter-consequnce/timer (no brackets)
     )
 
       """, re.VERBOSE)
