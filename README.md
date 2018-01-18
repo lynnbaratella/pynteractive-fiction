@@ -43,7 +43,7 @@ You win. Happy feelings.
 - in the case of `\actions` entry you'll need a `<< ` for every line of text; the next command can be specified right after every line of text
 - with `\reaction` entries you can specify in squared brackets, right after the name, the time in seconds that every `++ ` line will wait before being displayed. As an alternative you can specify that number in squared brackets after the double plus symbol (`++[2] `) 
 - to end the game (you might want to) you can simply use `\ENDGAME` as the next command (yes, in Caps: you're screaming to the computer).
-- see "How to make it work" for what concerns the script setup
+- see "setup"
 
 ## The script
 * written on Python 3.6
@@ -75,6 +75,6 @@ This is my *first* proper Python project; let me save you some time.
 
 Look somewhere else if:
 * you need to write long and complex storylines: with this syntax errors are easy to miss (WIP #1 might partially solve the problem)
-* you're feeling lazy: impossibility to use placeholders (e.g. in order to write a single reaction where one word changes according to the chosen actions): you might need to manually write multiple similar entries
+* you're feeling extremely lazy: impossibility to use wildcards (e.g. use an asterisk as a placeholder so you can write a single reaction where one word changes according to the chosen actions): you might need to manually write multiple similar entries
 
 
