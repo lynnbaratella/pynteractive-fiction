@@ -60,7 +60,7 @@ def str2int(string):
         return stringConvertedInt
 
     except ValueError:
-        inputError('string representing an integer value')
+        inputError('a string representing an integer value')
     except TypeError:
         return None
 
@@ -68,7 +68,7 @@ def find(string, stringList, *args): # returns a list of indices. you can specif
 
     if (args
         and type(args[0]) == int):
-        
+
         howMany = args[0]
         getAll = False
     else:

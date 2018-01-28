@@ -6,18 +6,19 @@ from time import sleep
 
 # defaultTime = 0.5 # doesn't change the default time for getDefinition
 
-def read(token):
+def read(text):
+    print(text)
+
+
+def narrate(token):
 
     print('\n')
-
-
-
 
 
     if token['command']['type'] == 'scene':
 
         for idx in range(0, len(token['content']['text'])):
-            print(token['content']['text'][idx]) # time separation for printing scene paragraphs?
+            read(token['content']['text'][idx]) # time separation for printing scene paragraphs?
 
 
 
@@ -25,8 +26,7 @@ def read(token):
 
     elif token['command']['type'] == 'actions':
 
-        # ONESHOT still to be completed
-        # USE CARDINAL
+
 
         #oneshot = token['content']['oneshot']
         text = token['content']['text']
@@ -47,7 +47,7 @@ def read(token):
 
         for idx in range(0, len(cardinal)):
             if cardinal[idx]:
-                print(str(cardinal[idx]) + '. ' + text[idx])
+                read(str(cardinal[idx]) + '. ' + text[idx])
 
 
 
@@ -67,7 +67,7 @@ def read(token):
                 except: # more specific
                     sleep(token['content']['gen'])
 
-            print(token['content']['text'][idx])
+            read(token['content']['text'][idx])
 
             # AFTER PRINTING TIME MANAGEMENT
             try:
@@ -88,11 +88,11 @@ def read(token):
                         sleep(token['content']['gen'])
 
 
-
+"""
 def anyTrue(listName):
 
 
     for idx in range(0, len(listName)):
         if listName[idx] is True:
             return True
-    return False
+    return False"""

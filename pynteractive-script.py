@@ -3,15 +3,25 @@
 from time import sleep
 
 
-from FN_read import read
-from FN_getDefinition import getDefinition
+from FN_read import narrate
+
+
 
 from FN_strFun import str2int
-from FN_strFun import find # returns list of indices; (string, stringList, varargin:howMany)
 
 from FN_loadGame import loadGame
 
+
+
+"""
+* What happens when it ends? no error message
+* which function is used to prompt input? How to change the message if I press enter without no number?
+
+"""
 # %% Files
+
+
+
 
 fileNameList = ['test_fiction.txt'] # HERE
 
@@ -19,17 +29,12 @@ fileNameList = ['test_fiction.txt'] # HERE
  # %% Functions
 
 
-
-
-
-
-
 def promptAction(message,maxNum):
 
     userInput = input(message)
 
     if userInput == 'exit':
-        endGame()
+        quitGame()
 
     userInput = str2int(userInput)
 
@@ -50,7 +55,7 @@ def gameStart():
     userInput = input('Ready to start? Press ENTER to begin or type "exit" to leave the game:\n')
 
     if userInput == 'exit':
-        endGame()
+        quitGame()
 
 
     while (userInput != ''
@@ -66,10 +71,12 @@ def gameStart():
     sleep(1)
 
 
-def endGame():
+def quitGame():
     raise KeyboardInterrupt('The game was interrupted by the user')
 
-
+def endScreen():
+    sleep(5)
+    print('Thank you for playing! \nIf you wish to play again you can run the script by pressing F5')
 
 # %% Start game
 
@@ -83,31 +90,35 @@ gameStart()
 nextEntry = firstScene
 
 
-while True:
-    token = game[nextEntry]
-    read(token)
+while nextEntry != r'\ENDGAME':
 
+    token = game[nextEntry]
+
+    narrate(token)
+
+    # check if the current token is an action
     if token['command']['type'] == 'actions':
         cardinal = token['content']['cardinal']
 
         nChoices = len([i for i in cardinal if i])
-        whichAction = promptAction('\n',nChoices)
+        whichAction = promptAction('\n>> ',nChoices)
 
         indexAction = cardinal.index(whichAction)
-        if token['content']['oneshot'][indexAction] is False: # oneshot action to be done
+        if token['content']['oneshot'][indexAction] is False: # if oneshot action still to be done
 
-            token['content']['oneshot'][indexAction] = True # marked done
-            cardinal[indexAction] = None # removed the corresponding number
+            token['content']['oneshot'][indexAction] = True # markes it done
+            cardinal[indexAction] = None # removes the corresponding number from the possible actions
 
+            # update the numbers representing the actions
             idx = 0
             while idx < (len(cardinal)-(indexAction + 1)):
-                cardinal[indexAction + idx + 1] = whichAction + idx # ISSUE HERE
+                cardinal[indexAction + idx + 1] = whichAction + idx
                 idx = idx + 1
-                # fix the following cardinal numbers
 
-        nextEntry = token['content']['next'][indexAction] # find index
+
+        nextEntry = token['content']['next'][indexAction] # go to the next command according to the chosen action
     else:
-        nextEntry = token['metadata']['nextCommand']
+        nextEntry = token['metadata']['nextCommand'] # if it's not an action go directly to the next command
 
 
 

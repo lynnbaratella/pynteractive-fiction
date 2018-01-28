@@ -8,39 +8,38 @@ from FN_getDefinition import getDefinition
 from FN_strFun import find # returns list of indices; (string, stringList, varargin:howMany)
 
 
-""" # LOADGAME
-
-Look for definitions
-extract command.
-captured contains:
-captured = {'whole': wholeCommand,
-                    'pure': pureCommand,
-                    'type': typeCommand,
-                    'name': nameField,
-                    'opt': optionalField,
-                    'idx': lineIdx}
-
-NOPE! REWRITE!
-
-what the loadgame dictionary should contain is
-
-'pure command' (as a dictionary key)
-    * command [pure, whole, type, optional argument]
-    * definition [content] (see getDefinition)
-    * idx: begin line + breakline (where most errors occurr) + FILE NAME
+"""
+STRUCTURE OF THE TOKENS
 
 
-    additional field: 'metadata'
-        * event counter
-        # no need for action counter (change the isDone into True if oneshot (not None))
-        * next command
-        * next action command
+- command
+    - whole
+    - pure
+    - type
+    - name
+    - opt
 
+- content
 
-overlapping stuff between extractCommand and getDefinition:
-    * name
-    * type
+    [ACTIONS ONLY]
+    - [cardinal]
+    - [next]
+    - [oneshot]
 
+    {REACTIONS ONLY}
+    - {gen}
+    - {spec}
+
+    - text
+
+- indices
+    - begin
+    - end
+    - fileName
+
+- metadata
+    - counter
+    - nextCommand
 
 """
 
@@ -221,5 +220,3 @@ pattern = re.compile(r""" # raw string for regular expression
 
 
 
-
-[game, begin] = loadGame('test_fiction.txt')
