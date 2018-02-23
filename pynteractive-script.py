@@ -1,29 +1,17 @@
 
-
 from time import sleep
 
-
 from FN_read import narrate
-
-
-
 from FN_strFun import str2int
-
 from FN_loadGame import loadGame
 
 
+# %% FILES SETUP
 
-"""
-* What happens when it ends? no error message
-* which function is used to prompt input? How to change the message if I press enter without no number?
+# you can either replace the user with ~ or use the full path
+inputPath = '~/Dropbox/Python/#textAdventure/pynteractive-fiction/'
 
-"""
-# %% Files
-
-
-
-
-fileNameList = ['test_fiction.txt'] # HERE
+fileNameList = ['test_fiction.txt'] # if more than one: ['one.txt','two.txt']
 
 
  # %% Functions
@@ -38,10 +26,10 @@ def promptAction(message,maxNum):
 
     userInput = str2int(userInput)
 
-    while (type(userInput) != int
-           or userInput < 1
+    # the non-int cases are handled by str2int()
+    while (userInput < 1
            or userInput > maxNum):
-
+        print('[Number out of range: try again]')
         userInput = input(message)
         userInput = str2int(userInput)
 
@@ -81,7 +69,10 @@ def endScreen():
 # %% Start game
 
 
-[game, firstScene] = loadGame(fileNameList)
+
+
+
+[game, firstScene] = loadGame(fileNameList,inputPath)
 
 # ready to start?
 gameStart()
@@ -121,31 +112,21 @@ while nextEntry != r'\ENDGAME':
         nextEntry = token['metadata']['nextCommand'] # if it's not an action go directly to the next command
 
 
-
+print('\n[THE END]\n[*credits*]')
 
 # %% NOTES:
 
 """
 # todo:
 
-* completely load the game at game start + accurate error reporting for command definitions
-* make \oneshot actions actually work
 * easier game setup (no need to define path?)
-
 * remove the extra newlines/tabs: if isEmpty: don't add. Possible option (debugging might be harder)
 * IF NO SUBSEQUENT COMMAND RESUME FROM LAST ACTION (warning message)
 
-* transcription of multiple files (list of filenames as a single input)
 
 report double begin_index (+ filename if they differ) in these cases:
 * warning if same name in different trype of entry
 * error if same command is repeated
-
-# game steps:
-1. begin with first available _defined_ scene
-2. read() text until closing bracket line
-3. capture command on that same line
-4. look for \def\command{}
 
 
 """

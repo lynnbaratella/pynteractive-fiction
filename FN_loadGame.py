@@ -45,19 +45,28 @@ STRUCTURE OF THE TOKENS
 
 
 
-def loadGame(fileNameList):
-
+def loadGame(fileNameList,inputPath):
+    
+    # initialising variables to be returned
     game = {}
     firstScene = None
-
-
+    
+   # obtaining full path to the files
+    
     if type(fileNameList) == str:
-        fileNameList = [fileNameList]
+            fileNameList = [fileNameList]
+            
+    
+    for fileName in fileNameList:
 
-    for fileIdx in range(0, len(fileNameList)):
-
-        fileName = fileNameList[fileIdx]
-        fileTranscript = transcribe(fileName)
+        
+        if '~' in inputPath:
+            inputPath = os.path.expanduser(inputPath)
+            # for inputPath refer to SETUP at the top of the main file
+        
+        filePath = inputPath + fileName
+        
+        fileTranscript = transcribe(filePath)
 
 
         # look for the definitions
@@ -127,27 +136,23 @@ def loadGame(fileNameList):
     return game, firstScene # improve errorList with location of the error in the definition
 
 
-def transcribe(fileName):
+def transcribe(filePath):
 
     fileTranscript = []
     try:
 
-        path = os.path.expanduser('~/Dropbox/Python/#textAdventure/pynteractive-fiction/') # change 1/2 HERE
-        path = path + fileName
-
         # transcribe file into list
-        with open(path, 'r') as myfile:
+        with open(filePath, 'r') as myfile:
 
             fileTranscript = myfile.readlines()
             return fileTranscript
 
     except FileNotFoundError as e:
-        raise Exception('The specified path is not correct.\n'
-                        + path + '\n\n'
-                        'Check out:\n'
-                        '- the folder path in the definition of the funtion '
-                        'transcribe();\n'
-                        '- the file name on function call.').with_traceback(e.__traceback__)
+        raise Exception('The specified file appears to be non existent.\n'
+                        + filePath + '\n\n'
+                        'Check out in the SETUP section of the main file:\n'
+                        '- the folder path\n'
+                        '- the specified file name(s).').with_traceback(e.__traceback__)
 
 
 
