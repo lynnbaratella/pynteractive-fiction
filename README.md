@@ -14,8 +14,9 @@ Three types of entry:
 - mind the closing brace on newline
 - after that closing brace in the entries `\scene` and `\reaction` you'll need to specify to the program where to look next (the next command, *without* specifying `\def`)
 - in the case of `\actions` entry you'll need a `<< ` for every line of text; the next command can be specified right after every line of text
+- actions can be `<<[\oneshot] `: this way after the action is performed it will not be available anymore
 - with `\reaction` entries you can specify in squared brackets, right after the name, the time in seconds that every `++ ` line will wait before being displayed. As an alternative you can specify that number in squared brackets after the double plus symbol (`++[2] `) 
-- One of the files has to contain `\BEGIN\<whichEntry>{<entryName>}`
+- The game must start somewhere: one of the files has to contain `\BEGIN\scene{<entryName>}`
 - to end the game (you might want to) you can simply use `\ENDGAME` as the next command (yes, in Caps: you're screaming to the computer).
 - see "How to make it work" for what concerns the script setup
 
