@@ -15,12 +15,15 @@ Three types of entry:
 - after that closing brace in the entries `\scene` and `\reaction` you'll need to specify to the program where to look next (the next command, *without* specifying `\def`)
 - in the case of `\actions` entry you'll need a `<< ` for every line of text; the next command can be specified right after every line of text
 - with `\reaction` entries you can specify in squared brackets, right after the name, the time in seconds that every `++ ` line will wait before being displayed. As an alternative you can specify that number in squared brackets after the double plus symbol (`++[2] `) 
+- One of the files has to contain `\BEGIN\<whichEntry>{<entryName>}`
 - to end the game (you might want to) you can simply use `\ENDGAME` as the next command (yes, in Caps: you're screaming to the computer).
 - see "How to make it work" for what concerns the script setup
 
 ### Example
 A short working example of the content of the text file
 ```
+\BEGIN\scene{somewhere}
+
 \def\scene{somewhere}{
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 }\actions{actionsName}
@@ -50,30 +53,19 @@ You win. Happy feelings.
 * informative errors
 
 ### Setup
-1. the game has to be written in a text file in the same folder as the script
-2. in the file "pynteractive.py", where the function `transcribe()` is called change the file name
-3. in the same file, where the function `transcribe()` is defined adjust the path of the folder containing the script 
-4. if you're having trouble with the two previous operations just use ctrl+F or cmd+F and look for the two instances of "here".
-5. run the script, follow the instructions and enjoy the game
-
-### How it works
-Main game steps:
-1. begin with first available _defined_ scene
-2. `read()` text until closing bracket line
-3. capture command on that same line
-4. look for `\def\<command>{}`
-5. start over with #2
+1. the game has to be written in one or more text files in the same folder as the script
+2. in the file "pynteractive.py" specify the path to the folder (you can use the ~ shortcut)
+3. in the same file, specify one or more file names
+4. run the script, follow the instructions and enjoy the game
 
 ## Work In Progress
-1. **Loading the whole game in advance:** Currently the entries are loaded during the game, something that might lead to errors while playing if entries are missing or the syntax is incorrect. I'm working in order to load the whole game beforehand, so the in-game behavior will be completely predictable.
-2. **Oneshot actions**: `<<[\oneshot] you do something` makes the action disappear when you come back to the same action menu.
-3. **Simplified setup**
+* **Even simpler setup**
 
 ## Limitations
 This is my *first* proper Python project; let me save you some time. 
 
 Look somewhere else if:
-* you need to write long and complex storylines: with this syntax errors are easy to miss (WIP #1 might partially solve the problem)
+* you need to write long and complex storylines: it's hard to lose track of what happens with this syntax
 * you're feeling lazy: impossibility to use placeholders (e.g. in order to write a single reaction where one word changes according to the chosen actions): you might need to manually write multiple similar entries
 
 
