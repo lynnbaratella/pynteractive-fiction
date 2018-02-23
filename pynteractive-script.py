@@ -119,6 +119,7 @@ print('\n[THE END]\n[*credits*]')
 """
 # todo:
 
+* improve the error-reporting by indicating filename
 * easier game setup (no need to define path?)
 * remove the extra newlines/tabs: if isEmpty: don't add. Possible option (debugging might be harder)
 * IF NO SUBSEQUENT COMMAND RESUME FROM LAST ACTION (warning message)
@@ -127,6 +128,5 @@ print('\n[THE END]\n[*credits*]')
 report double begin_index (+ filename if they differ) in these cases:
 * warning if same name in different trype of entry
 * error if same command is repeated
-
 
 """
