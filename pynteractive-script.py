@@ -8,8 +8,8 @@ from FN_loadGame import loadGame
 
 # %% FILES SETUP
 
-# you can either replace the user with ~ or use the full path
-inputPath = '~/Dropbox/Python/#textAdventure/pynteractive-fiction/'
+# leave empty if the fiction files are in the same folder as the code
+inputPath = ''
 
 fileNameList = ['test_fiction.txt'] # if more than one: ['one.txt','two.txt']
 

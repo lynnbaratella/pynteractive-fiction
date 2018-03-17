@@ -46,26 +46,33 @@ STRUCTURE OF THE TOKENS
 
 
 def loadGame(fileNameList,inputPath):
-    
+
     # initialising variables to be returned
     game = {}
     firstScene = None
-    
+
    # obtaining full path to the files
-    
+
     if type(fileNameList) == str:
             fileNameList = [fileNameList]
-            
-    
+
+
     for fileName in fileNameList:
 
-        
-        if '~' in inputPath:
+
+        if not inputPath:
+            inputPath = os.path.expanduser(os.getcwd())
+
+        elif '~' in inputPath:
             inputPath = os.path.expanduser(inputPath)
             # for inputPath refer to SETUP at the top of the main file
-        
+
+        if inputPath[-1] != '/':
+            inputPath = inputPath + '/'
+
+
         filePath = inputPath + fileName
-        
+
         fileTranscript = transcribe(filePath)
 
 
